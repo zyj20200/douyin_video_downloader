@@ -36,7 +36,10 @@ douyin_video_downloader/
 ├── logs/               # 滚动日志文件
 ├── requirements.txt
 ├── runtime.txt         # Python 版本（3.10.14）
-├── Procfile            # 部署配置
+├── Procfile            # PaaS 部署配置
+├── Dockerfile          # Docker 镜像构建
+├── docker-compose.yml  # Docker Compose 编排
+├── .dockerignore       # Docker 构建忽略规则
 └── LICENSE             # MIT 许可证
 ```
 
@@ -91,6 +94,31 @@ python main.py "https://v.douyin.com/xxxxx/" --mode cover
 | `--backoff-factor` | `1.0` | 指数退避系数 |
 
 ## 部署
+
+### Docker Compose（推荐）
+
+```bash
+docker compose up -d
+```
+
+浏览器打开 `http://localhost:5000`。
+
+下载的文件和日志通过 volume 映射持久化到宿主机的 `downloads/` 和 `logs/` 目录。
+
+常用命令：
+
+```bash
+# 查看日志
+docker compose logs -f
+
+# 停止服务
+docker compose down
+
+# 重新构建并启动
+docker compose up -d --build
+```
+
+### PaaS 平台
 
 项目包含 `Procfile`、`runtime.txt` 和 `requirements.txt`，支持一键部署到 Railway、Render 或 Heroku。
 

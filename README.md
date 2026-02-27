@@ -36,7 +36,10 @@ douyin_video_downloader/
 ├── logs/               # Rotating log files
 ├── requirements.txt
 ├── runtime.txt         # Python version (3.10.14)
-├── Procfile            # Deployment config
+├── Procfile            # PaaS deployment config
+├── Dockerfile          # Docker image build
+├── docker-compose.yml  # Docker Compose orchestration
+├── .dockerignore       # Docker build ignore rules
 └── LICENSE             # MIT License
 ```
 
@@ -91,6 +94,31 @@ Options:
 | `--backoff-factor` | `1.0` | Exponential backoff multiplier |
 
 ## Deployment
+
+### Docker Compose (Recommended)
+
+```bash
+docker compose up -d
+```
+
+Open `http://localhost:5000` in your browser.
+
+Downloaded files and logs are persisted to the host via volume mounts (`downloads/` and `logs/`).
+
+Common commands:
+
+```bash
+# View logs
+docker compose logs -f
+
+# Stop the service
+docker compose down
+
+# Rebuild and start
+docker compose up -d --build
+```
+
+### PaaS Platforms
 
 This repo includes `Procfile`, `runtime.txt`, and `requirements.txt` for one-click deployment on Railway, Render, or Heroku.
 
