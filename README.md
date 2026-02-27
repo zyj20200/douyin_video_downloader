@@ -4,7 +4,7 @@
 
 A professional Douyin (TikTok China) video downloader with a modern Web UI and CLI support.
 
-![](static\img\home.png)
+![home](static/img/home.png)
 
 ## Features
 

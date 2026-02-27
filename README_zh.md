@@ -4,7 +4,7 @@
 
 一个专业的抖音视频下载器，提供现代化的 Web 界面和命令行支持。
 
-![](static\img\home.png)
+![home](static/img/home.png)
 
 ## 功能特性
 
