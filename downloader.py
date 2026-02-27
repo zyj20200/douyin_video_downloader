@@ -143,7 +143,7 @@ class DouyinDownloader:
         # Share page parsing is more reliable than the public API, so try it first.
         try:
             return self._fetch_item_info_from_share_page(video_id=video_id, resolved_url=resolved_url)
-        except DouyinAPIError as exc:
+        except (DouyinAPIError, requests.RequestException, ValueError, KeyError) as exc:
             self.logger.warning(
                 "Share page parsing failed for %s (%s). Falling back to public API.",
                 video_id,
