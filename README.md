@@ -4,6 +4,8 @@
 
 A professional Douyin (TikTok China) video downloader with a modern Web UI and CLI support.
 
+![](static\img\home.png)
+
 ## Features
 
 - **Watermark-free video download** — automatically removes watermark (`playwm` -> `play`)
