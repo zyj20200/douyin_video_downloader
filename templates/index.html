@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>抖音视频下载器</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <div class="bg-decoration">
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    <div class="circle circle-3"></div>
+  </div>
+
+  <div class="page-wrapper">
+    <!-- Top header -->
+    <header class="top-header">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="23 7 16 12 23 17 23 7"></polygon>
+          <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+        </svg>
+      </div>
+      <div>
+        <h1>抖音视频下载器</h1>
+        <p class="subtitle">粘贴分享链接，快速下载无水印视频、音频或封面</p>
+      </div>
+    </header>
+
+    <!-- Main two-column layout -->
+    <div class="main-grid">
+      <!-- Left: download config -->
+      <div class="panel panel-left">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          <span>下载配置</span>
+        </div>
+
+        <div class="panel-body">
+          <div class="input-group">
+            <label for="url-input">分享链接</label>
+            <div class="input-wrapper">
+              <input
+                type="text"
+                id="url-input"
+                placeholder="https://v.douyin.com/xxxxx/"
+                autocomplete="off"
+                spellcheck="false"
+              >
+              <button id="paste-btn" class="icon-btn" title="粘贴">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                  <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="mode-group">
+            <label>下载类型</label>
+            <div class="mode-selector">
+              <button class="mode-btn active" data-mode="video">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                  <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                </svg>
+                <span>无水印视频</span>
+              </button>
+              <button class="mode-btn" data-mode="audio">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 18V5l12-2v13"></path>
+                  <circle cx="6" cy="18" r="3"></circle>
+                  <circle cx="18" cy="16" r="3"></circle>
+                </svg>
+                <span>音频</span>
+              </button>
+              <button class="mode-btn" data-mode="cover">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+                <span>封面图</span>
+              </button>
+            </div>
+          </div>
+
+          <button id="download-btn" class="download-btn">
+            <span class="btn-text">开始下载</span>
+            <span class="btn-loading">
+              <svg class="spinner" viewBox="0 0 24 24" width="20" height="20">
+                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="31.4 31.4" />
+              </svg>
+              <span>下载中...</span>
+            </span>
+          </button>
+
+          <div id="status-area" class="status-area hidden">
+            <div id="status-message" class="status-message"></div>
+          </div>
+        </div>
+
+        <!-- History inside left panel -->
+        <div id="history-section" class="history-section hidden">
+          <div class="panel-header history-header">
+            <div class="panel-header-left">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <span>下载记录</span>
+            </div>
+            <button id="clear-history" class="text-btn text-btn-sm">清空</button>
+          </div>
+          <div id="history-list" class="history-list"></div>
+        </div>
+      </div>
+
+      <!-- Right: log panel -->
+      <div class="panel panel-right">
+        <div class="panel-header">
+          <div class="panel-header-left">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="4 17 10 11 4 5"></polyline>
+              <line x1="12" y1="19" x2="20" y2="19"></line>
+            </svg>
+            <span>运行日志</span>
+          </div>
+          <button id="clear-log-btn" class="text-btn text-btn-sm">清空</button>
+        </div>
+        <div id="log-content" class="log-content">
+          <div class="log-empty">点击「开始下载」后，日志将在此处实时显示</div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>Douyin Video Downloader &mdash; 仅供学习和个人使用</p>
+    </footer>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
