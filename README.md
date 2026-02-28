@@ -126,6 +126,8 @@ This repo includes `Procfile`, `runtime.txt`, and `requirements.txt` for one-cli
 gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120
 ```
 
-## License
+## 📜 License
 
-[MIT](LICENSE)
+This project is licensed under the [MIT](./LICENSE).
+
+This is an open-source project developed based on [douyin_video_downloader](https://github.com/rathodpratham-dev/douyin_video_downloader) (MIT License).
